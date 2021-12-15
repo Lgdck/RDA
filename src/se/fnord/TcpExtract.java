@@ -167,7 +167,7 @@ public class TcpExtract {
 				streams.put(f.session(), w);
 			}
 			TcpSessionData d = (TcpSessionData) f;
-			long ts=d.rootFrame().timestamp();
+			long ts=d.rootFrame().timestamp(); //pcaprecordimpl
 			TcpFrame tcpFrame1 = (TcpFrame)d.parentFrame();
 			long seq = tcpFrame1.sequence();
 			long ack=tcpFrame1.ackNumber();

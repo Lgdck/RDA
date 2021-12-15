@@ -21,7 +21,7 @@ import util.async.MainGeneric;
 
 public class ResolverConfig {
 
-	
+
 
 	//private String [] servers = null;
 	
@@ -436,8 +436,8 @@ public class ResolverConfig {
 		
 		System.out.println( validateAnIpAddressWithRegularExpression("None"));
 		System.out.println( validateAnIpAddressWithRegularExpression("202.197.22.11"));
-	
-List<String> nsList = ResolverConfiguration.open().nameservers();
+
+		List<String> nsList = ResolverConfiguration.open().nameservers();
         System.out.println(nsList);
 		//find DNS servers Ericfu
 		MainGeneric.removeNonIP(nsList);

@@ -85,6 +85,7 @@ public class AddressFactory {
 		for (final String addressString : addressStrings) {
 			//lookupBarrier.fork();
 			new NetAddress(addressString, port, new CB1<AddressIF>() {
+				//回调方法  上面的new NetAddress的构造方法中会有CB1这个对象的call方法 回调这个匿名内部类的cb方法
 				protected void cb(CBResult result, AddressIF address) {
 					switch (result.state) {
 						case OK: {

@@ -58,11 +58,11 @@ public class ParallelSimpleRDATable  implements Writable ,Serializable{
 
 	static Log log=new Log(ParallelSimpleRDATable.class);
 
+	public static int N_HASH = 2;
 	//hash function
-	public static LongHashFunction[] LongHashFunction4PosHash;
-	
+	public static LongHashFunction[] LongHashFunction4PosHash=new LongHashFunction[N_HASH];
+
 	//number of hash functions
-	 public static int N_HASH = 2;
 	//scale the bucket size
 	public static double scaleBucketFactor =1;
 	

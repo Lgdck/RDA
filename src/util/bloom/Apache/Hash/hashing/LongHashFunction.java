@@ -16,7 +16,8 @@
 
 package util.bloom.Apache.Hash.hashing;
 
-import org.jetbrains.annotations.NotNull;
+
+import com.sun.istack.internal.NotNull;
 import sun.nio.ch.DirectBuffer;
 
 import java.io.Serializable;

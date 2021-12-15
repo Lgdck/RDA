@@ -23,7 +23,7 @@ public class SimpleRDAMeasurementPointSRDA {
 	
 	static Log log=new Log(SimpleRDAMeasurementPointSRDA.class);
 	
-	//RDA compute
+	//RDA compute  s
 	 //public SimpleRDATable sender;
 	public SimpleRDATable sender;
 	 //cache for RDA

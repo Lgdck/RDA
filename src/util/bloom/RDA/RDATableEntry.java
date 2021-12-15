@@ -21,8 +21,8 @@ public class RDATableEntry  implements Writable ,Serializable{
 	//measured in millisecond;System.currentTimeMillis()
 	int Counter=0;
 	float TS=0;
-	long keyCheck = 0;
-	long keySum = 0;
+	long keyCheck = 0;   //桶的索引？
+	long keySum = 0;   //桶的ID？  值为桶中报文id的异或值
 	
 
 	//byte[] valueSum=null;
@@ -81,7 +81,7 @@ public class RDATableEntry  implements Writable ,Serializable{
 	 * @return
 	 */
 	public double getAvgTS(){
-		long Num=getNumItems();
+		long Num=getNumItems();  //Math.abs(Counter)
 		if(Num>0){
 		return TS/(0.0+Num);
 		}else{
@@ -105,9 +105,9 @@ public class RDATableEntry  implements Writable ,Serializable{
 	 */
 	public boolean isPureOriginal(){
 		//tick
-		long tick = getNumItems();
+		long tick = getNumItems();  //Math.abs(Counter)
 		
-		if((tick==1 || tick==-1)){
+		if((tick==1 || tick==-1)){  //这个在论文里就是delta  为正负1时  才是pure桶
 			
 		//int[] h = HashTableEntry.hashC.hash(new Key(HashTableEntry.ToByteArray(keySum)),HashTableEntry.N_HASHCHECK);
 			return RDATable.LongHashFunction4PKeyHash.hashLong(keySum) == keyCheck;
@@ -145,7 +145,7 @@ public class RDATableEntry  implements Writable ,Serializable{
 		
 		//long tick = getNumItems();
 		
-		if(Math.abs(getNumItems())==1){
+		if(Math.abs(getNumItems())==1){  //这个在论文里就是delta  为正负1时  才是pure桶
 			
 		//int[] h = HashTableEntry.hashC.hash(new Key(HashTableEntry.ToByteArray(keySum)),HashTableEntry.N_HASHCHECK);
 			return RDATable.LongHashFunction4PKeyHash.hashLong(keySum)==keyCheck;

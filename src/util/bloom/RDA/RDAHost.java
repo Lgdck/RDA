@@ -95,7 +95,7 @@ public class RDAHost {
   	
 	// RDA measurement host
 	private RDAMeasurementPoint _hostFourFields;
-	private SimpleRDAMeasurementPoint _host;
+	private SimpleRDAMeasurementPoint _host;  //这个对象存有发送端的缓存  在parseFiles里有更改
 	
 	//comm end point
 	private ObjCommIF comm;
@@ -167,6 +167,7 @@ public class RDAHost {
 		
 	}
 	/**
+	 * 和Pair重复
 	 * entry
 	 */
 	public void  begin(){
@@ -232,7 +233,7 @@ public class RDAHost {
 		
 	}
 	
-	/**
+	/** 和Pair重复
 	 * session
 	 * @param cbDone
 	 */
@@ -307,7 +308,8 @@ public class RDAHost {
 						continue;
 					}
 		         //record the packets
-		         _host.packetIncoming(id[0],TS[0]);
+		         _host.packetIncoming(id[0],TS[0]);//将报文存入发送端的缓存   结构是报文信息的hashid 时间戳
+
 		      }
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -401,7 +403,7 @@ public class RDAHost {
 	
 
 	
-	
+	//和pair重复
 	public void registerRepeatRDATestTimer(){
 		long delay = Repeat_DELAY;
 
@@ -409,7 +411,7 @@ public class RDAHost {
 		EL.get().registerTimerCB(delay, tickControl);
 	}
 
-	//--------------  	
+	//--------------  	和pair重复
 	public abstract class ResponseObjCommCB<T extends ObjMessageIF> extends ObjCommCB<T> {
 
 		protected void sendResponseMessage(final String handler, final AddressIF remoteAddr, final ObjMessage response,
@@ -450,13 +452,14 @@ public class RDAHost {
 		protected void cb(CBResult result, RDARequestMsg arg1, AddressIF arg2, Long arg3, CB1<Boolean> cbHandled) {
 			// TODO Auto-generated method stub
 			final AddressIF fromNode = arg1.from;
+			//和pair比 就少了一个arg1.isA的判断
 			//store my hashtable
 			RDAResponseMsg msg = new RDAResponseMsg(_host.sender.hashTable);
 			sendResponseMessage("RDARequest", fromNode, msg, arg1.getMsgId(), null, cbHandled);
 		}
 
 	}
-
+	//和pair重复
 	public class MissingNodeReqHandler extends ResponseObjCommCB<MissingNodeTSRequestMsg2> {
 
 		@Override

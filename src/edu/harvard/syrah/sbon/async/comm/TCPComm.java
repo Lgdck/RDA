@@ -304,8 +304,10 @@ abstract public class TCPComm extends Comm implements TCPCommIF {
 	protected abstract class ReadConnHandler extends Comm.ReadConnHandler {
 		protected ReadConnHandler(SelectableChannel channel, NetAddress remoteAddr) {	super(channel, remoteAddr);	}
 
+
+
 		protected Boolean cb(CBResult result, SelectionKey key) {
-			if (timeoutPool.containsKey(channel)) { 
+			if (timeoutPool.containsKey(channel)) {
 				timeoutPool.get(channel).touchConnection();
 			}
 			return true;

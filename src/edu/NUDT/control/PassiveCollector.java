@@ -94,7 +94,7 @@ public class PassiveCollector {
 
 	    		List<PcapNetworkInterface> tmp;
 				try {
-					tmp = Pcaps.findAllDevs();
+					tmp = Pcaps.findAllDevs();//发现所有的网卡
 					POut.toString(tmp);
 		    		if(!tmp.isEmpty()){
 		    			Iterator<PcapNetworkInterface> ier = tmp.iterator();
@@ -102,6 +102,7 @@ public class PassiveCollector {
 		    				PcapNetworkInterface nxt = ier.next();
 		    				log.main(nxt.getName());
 		    				//not local
+//							System.out.println(nxt.getName()+"-------------------"+PassiveCollectorPeriod.netcard);
 		    				if(nxt.getName().equalsIgnoreCase(PassiveCollectorPeriod.netcard)){
 		    					try {
 									dumpHandler =nxt.openLive(snaplen, PromiscuousMode.PROMISCUOUS,  timeout);

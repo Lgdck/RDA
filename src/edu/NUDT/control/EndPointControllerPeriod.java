@@ -24,7 +24,7 @@ import util.bloom.RDA.PassiveRDAHost;
 public class EndPointControllerPeriod {
 
 	static Log log = new Log(EndPointControllerPeriod.class);
-	
+
 	final static Logger logger
     = LoggerFactory.getLogger(EndPointControllerPeriod.class);
 
@@ -40,7 +40,7 @@ public class EndPointControllerPeriod {
 	//		pc.RDAHost.setTrigger(pc);
 	//	}
 	//}
-	
+
 	public EndPointControllerPeriod(CB0 cbDone){
 		/*
 		 * Create the event loop
@@ -54,7 +54,7 @@ public class EndPointControllerPeriod {
 			@Override
 			protected void cb(CBResult result) {
 				// TODO Auto-generated method stub
-				
+
 				switch (result.state) {
 				case OK: {
 					log.main("measure sync");
@@ -64,20 +64,20 @@ public class EndPointControllerPeriod {
 				case TIMEOUT:
 				case ERROR: {
 					log.error("Could not resolve  address: " + result.what);
-					
+
 					cbDone.call(result);
 					break;
 				}
 				}
 
 				}
-			
-		});		
-					
-	}
-	
 
-//	
+		});
+
+	}
+
+
+//
 //	/**
 //	 * start: ts
 //	 * end: ts, or reach the maximum count
@@ -165,13 +165,13 @@ public class EndPointControllerPeriod {
 //	}
 //	
 	public static void main(String[] args){
-		
-			
-		
+
+
+
 	EndPointControllerPeriod test = new EndPointControllerPeriod(new CB0(){
 			@Override
 			protected void cb(CBResult result) {
-				// TODO Auto-generated method stub				
+				// TODO Auto-generated method stub
 				log.main(result.toString());
 				switch (result.state) {
 				case OK: {
@@ -181,24 +181,24 @@ public class EndPointControllerPeriod {
 				}
 				case TIMEOUT:
 				case ERROR: {
-					log.error("Could not resolve  address: " + result.what);										
+					log.error("Could not resolve  address: " + result.what);
 					break;
 				}
 				}
-				
-				
-			}						
+
+
+			}
 		});
-		
-		
+
+
 		//long now = System.currentTimeMillis();
 		//long delay = 1000;
 		//last time
 		//int period = 10000;
-		
+
 		//test.setupCollection(now+delay, now+delay+measurementPeriod);
-		
-		
+
+
 		try {
 			EL.get().main();
 		} catch (OutOfMemoryError e) {

@@ -64,7 +64,7 @@ public class SimpleRDATable  implements Writable ,Serializable{
 	public SimpleRDATableEntry[] hashTable = null;
 	
 	//hash function
-	public static LongHashFunction[] LongHashFunction4PosHash;
+	public static LongHashFunction[] LongHashFunction4PosHash=new LongHashFunction[N_HASH];
 	
 	//create a lock on the data
 	public Semaphore BFOps=null;

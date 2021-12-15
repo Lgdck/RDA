@@ -156,7 +156,7 @@ public class PassiveRDAHost {
 	 * return the target
 	 */
 	public void parseRecordsCacheRDA(AbstractMap<Long,Long> SenderTSTable){		
-		 _hostRDA.packetIncoming(SenderTSTable);    
+		 _hostRDA.packetIncoming(SenderTSTable);      //会修改该对象的RDATABLE  和 SenderTSTable （缓存了id 和 ts）
 		 _hostRDA.isParsed=true;
 	}
 	
@@ -176,7 +176,7 @@ public class PassiveRDAHost {
 	}
 	
 	/**
-	 * parse the ts  
+	 * parse the ts  没用到
 	 * @param str
 	 * @param id
 	 * @param TS

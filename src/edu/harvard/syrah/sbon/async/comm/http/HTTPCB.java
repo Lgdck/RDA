@@ -17,7 +17,7 @@ public abstract class HTTPCB extends CB3<Integer, String, String> {
 	public HTTPCB() { super(); }
 	
 	public HTTPCB(long timeout) { super(timeout);	}
-	
+
 	protected abstract void cb(CBResult result, Integer resultCode, String requestResponse, String httpData);
 
 }

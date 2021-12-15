@@ -830,6 +830,7 @@ public class ObjComm extends TCPComm implements ObjCommIF {
 						//run the callback function
 					// log.debug("callback.hasTimeout=" + callback.hasTimeout());
 					EL.get().registerTimerCB(new CB0("ObjCommRRCB") {
+						//匿名内部类  可以实现new 抽象类
 						protected void cb(CBResult result) {
 							if (!callback.isCancelled()) {
 								outstandingCBs--;

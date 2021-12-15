@@ -13,7 +13,7 @@ import java.util.List;
 
 /**
  * 
- * Asynchronous callback interface
+ * Asynchronous callback interface(异步回调接口)
  * 
  */
 

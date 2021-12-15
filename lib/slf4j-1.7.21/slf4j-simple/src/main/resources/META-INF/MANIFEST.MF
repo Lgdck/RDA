@@ -9,5 +9,7 @@ Export-Package: org.slf4j.impl;version=${parsedVersion.osgiVersion}
 Import-Package: org.slf4j;version=${parsedVersion.osgiVersion},
  org.slf4j.spi;version=${parsedVersion.osgiVersion},
  org.slf4j.helpers;version=${parsedVersion.osgiVersion},
- org.slf4j.event;version=${parsedVersion.osgiVersion}
+ org.slf4j.event;version=${parsedVersion.osgiVersion},
+ sun.nio.ch,
+ sun.net.dns
 Fragment-Host: slf4j.api

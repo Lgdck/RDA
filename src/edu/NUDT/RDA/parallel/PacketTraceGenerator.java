@@ -2,10 +2,10 @@ package edu.NUDT.RDA.parallel;
 
 import util.async.Weibull;
 import edu.harvard.syrah.prp.Log;
-import eduni.simjava.distributions.*;
+
 
 /**
- * generate packet trace
+ * generate packet trace   产生韦伯分布的数据包
  * @author ericfu
  *
  */
@@ -16,8 +16,8 @@ public class PacketTraceGenerator {
 	long NextID=0;
 	long weibullMultiplier=10;
 	Weibull weibuller=null;
-	Sim_uniform_obj uniformDrop=null;
-	Sim_uniform_obj uniformReorder=null;
+	eduni.simjava.distributions.Sim_uniform_obj uniformDrop=null;
+	eduni.simjava.distributions.Sim_uniform_obj uniformReorder=null;
 	//loss
 	public double dropProbability=0;//0-1
 	public double reorderProbability=0;//0-1
@@ -31,8 +31,8 @@ public class PacketTraceGenerator {
 	public PacketTraceGenerator(double scale, double shape,double _dropProbability,double _reorderProbability,long initialTS,long _startID){
 		seed=System.currentTimeMillis();
 		weibuller = new Weibull("Delay",scale,shape,System.currentTimeMillis());
-		uniformDrop = new Sim_uniform_obj("drop",0,1,System.currentTimeMillis());
-		uniformReorder = new Sim_uniform_obj("reorder",0,1,System.currentTimeMillis());
+		uniformDrop = new eduni.simjava.distributions.Sim_uniform_obj("drop",0,1,System.currentTimeMillis());
+		uniformReorder = new eduni.simjava.distributions.Sim_uniform_obj("reorder",0,1,System.currentTimeMillis());
 		dropProbability = _dropProbability;
 		reorderProbability = _reorderProbability;
 		NextTime =initialTS;
@@ -45,7 +45,7 @@ public class PacketTraceGenerator {
 	 */
 	public double[] NextWeibullPacket(){
 		if(weibuller==null){System.err.println("Weibull empty");return null;}
-		double delay=weibuller.sample();
+		double delay=weibuller.sample();//0-1之间
 		//System.out.println("weibull: "+delay);
 		double [] value=new double[3];
 		//id
@@ -55,13 +55,18 @@ public class PacketTraceGenerator {
 		double networkDelay=Math.round(delay*weibullMultiplier);
 		//delivery time
 		value[2]=NextTime+networkDelay;
-		NextTime+=NextInterPacketArrivalDelay(networkDelay);
-		return value;
+		NextTime+=NextInterPacketArrivalDelay(networkDelay);  //networkDelay * 1.5
+		return value;  //id  发送时间戳  接收时间戳
 	}
-	
+
+	/**
+	 * 传来的参数是发送时延
+	 * @param timeT
+	 * @return
+	 */
 	public double[] NextWeibullPacket(double timeT){
 		if(weibuller==null){System.err.println("Weibull empty");return null;}
-		double delay=weibuller.sample();
+		double delay=weibuller.sample(); //产生一个韦伯分布的数
 		//System.out.println("weibull: "+delay);
 		double [] value=new double[3];
 		//id
@@ -94,11 +99,11 @@ public class PacketTraceGenerator {
 		
 		double p = Math.abs(uniformDrop.sample());
 		//System.out.println("p: "+p+"drop: "+dropProbability+", reorder: "+reorderProbability);
-		if(p<=dropProbability+reorderProbability){
-			if(uniformReorder.sample()<=dropProbability/(dropProbability+reorderProbability)){
-				return 0;
+		if(p<=dropProbability+reorderProbability){  //<= 0.1(丢) + 0.1(乱)
+			if(uniformReorder.sample()<=dropProbability/(dropProbability+reorderProbability)){  //前面判断了已经是故障包（20%概率）  这里是再分为丢包 和 乱序包  一半一半的概率
+				return 0; //丢
 			}else{
-				return 1;
+				return 1; //乱
 			}
 		}else{
 			return 2;

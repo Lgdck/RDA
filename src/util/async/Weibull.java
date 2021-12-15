@@ -57,6 +57,7 @@ public class Weibull implements ContinuousGenerator {
 	   * Generate a new random number.
 	   * @return The next random number in the sequence
 	   */
+	  //产生韦伯分布随机数
 	  public double sample() {
 		 
 		  double xx=rnd.nextDouble();
