@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # RDA
  a suit of algorithms for one way delay (OWD) based on set reconciliation.
 
@@ -23,3 +24,6 @@ If you find this work useful for your research, please consider citing the follo
 }
 
 Contact: yongquanf@nudt.edu.cn
+=======
+# RDA
+>>>>>>> eebaf75aae186a2a6600bbd0d725fa03b83841c6
